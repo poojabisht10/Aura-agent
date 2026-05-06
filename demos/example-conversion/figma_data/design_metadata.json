@@ -1,0 +1,12 @@
+{
+  "timestamp": "2026-03-20T10:00:00Z",
+  "source": "plugin",
+  "file_key": "",
+  "stats": {
+    "pageCount": 1,
+    "frameCount": 4,
+    "colorCount": 8,
+    "fontCount": 2,
+    "imageCount": 3
+  }
+}

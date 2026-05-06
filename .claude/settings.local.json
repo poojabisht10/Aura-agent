@@ -1,0 +1,43 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "WebFetch(domain:developers.figma.com)",
+      "Bash(node --version:*)",
+      "Bash(uv venv:*)",
+      "Bash(uv pip install:*)",
+      "Bash(.venvScriptspython -m pytest tests/ -v --tb=short)",
+      "Bash(\".venv/Scripts/python.exe\" -m pytest:*)",
+      "Bash(\".venv/Scripts/python.exe\" -c \"from claude_agent_sdk import tool; help\\(tool\\)\")",
+      "Bash(\".venv/Scripts/python.exe\" -c \"from backend.main import app; print\\(''FastAPI app loaded successfully''\\)\")",
+      "Bash(\".venv/Scripts/python.exe\":*)",
+      "Bash(curl:*)",
+      "Bash(python3:*)",
+      "Bash(source .venv/bin/activate)",
+      "Bash(python:*)",
+      "Bash(npm run build:*)",
+      "Bash(lsof:*)",
+      "Bash(echo:*)",
+      "WebFetch(domain:www.figma.com)",
+      "WebFetch(domain:github.com)",
+      "Bash(pip install:*)",
+      "Bash(.venv/bin/pip install:*)",
+      "Bash(.venv/bin/python:*)",
+      "Bash(dir:*)",
+      "mcp__shadcn__search_items_in_registries",
+      "mcp__shadcn__list_items_in_registries",
+      "Bash(npx tsc:*)",
+      "Bash(.venvScriptspython.exe -m pytest tests/ -v --tb=short)",
+      "Bash(where:*)",
+      "Bash(npx.cmd playwright:*)",
+      "Bash(ls:*)",
+      "Bash(.venv/Scripts/python.exe -m pip install:*)",
+      "Bash(.venv/Scripts/python.exe:*)"
+    ]
+  },
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": [
+    "shadcn",
+    "drawio"
+  ]
+}

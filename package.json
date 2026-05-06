@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "@ui-layouts/mcp": "^0.3.0",
+    "playwright": "^1.57.0"
+  },
+  "devDependencies": {
+    "shadcn": "^3.8.5"
+  }
+}

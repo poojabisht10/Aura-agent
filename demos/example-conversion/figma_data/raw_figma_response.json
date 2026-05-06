@@ -1,0 +1,81 @@
+{
+  "document": {
+    "id": "0:0",
+    "name": "Document",
+    "type": "DOCUMENT",
+    "children": [
+      {
+        "id": "page:1",
+        "name": "Landing Page",
+        "type": "CANVAS",
+        "backgroundColor": { "r": 0.898, "g": 0.898, "b": 0.898, "a": 1 },
+        "children": [
+          {
+            "id": "frame:header",
+            "name": "Header",
+            "type": "FRAME",
+            "absoluteBoundingBox": { "x": 0, "y": 0, "width": 1440, "height": 80 },
+            "constraints": { "vertical": "TOP", "horizontal": "LEFT_RIGHT" },
+            "clipsContent": true,
+            "layoutMode": "HORIZONTAL",
+            "primaryAxisSizingMode": "FIXED",
+            "counterAxisSizingMode": "AUTO"
+          },
+          {
+            "id": "frame:hero",
+            "name": "Hero",
+            "type": "FRAME",
+            "absoluteBoundingBox": { "x": 0, "y": 80, "width": 1440, "height": 600 },
+            "constraints": { "vertical": "TOP", "horizontal": "LEFT_RIGHT" },
+            "clipsContent": true,
+            "layoutMode": "VERTICAL"
+          },
+          {
+            "id": "frame:features",
+            "name": "Features",
+            "type": "FRAME",
+            "absoluteBoundingBox": { "x": 0, "y": 680, "width": 1440, "height": 480 },
+            "constraints": { "vertical": "TOP", "horizontal": "LEFT_RIGHT" },
+            "clipsContent": true,
+            "layoutMode": "VERTICAL"
+          },
+          {
+            "id": "frame:footer",
+            "name": "Footer",
+            "type": "FRAME",
+            "absoluteBoundingBox": { "x": 0, "y": 1160, "width": 1440, "height": 120 },
+            "constraints": { "vertical": "TOP", "horizontal": "LEFT_RIGHT" },
+            "clipsContent": true,
+            "layoutMode": "HORIZONTAL"
+          }
+        ]
+      }
+    ]
+  },
+  "components": {},
+  "schemaVersion": 0,
+  "styles": {
+    "style:heading-1": {
+      "key": "heading-1",
+      "name": "Heading/H1",
+      "styleType": "TEXT",
+      "description": "Primary heading"
+    },
+    "style:body": {
+      "key": "body",
+      "name": "Body/Regular",
+      "styleType": "TEXT",
+      "description": "Body text"
+    },
+    "style:primary-fill": {
+      "key": "primary-fill",
+      "name": "Primary/Blue",
+      "styleType": "FILL",
+      "description": "Primary brand color"
+    }
+  },
+  "name": "Acme Landing Page",
+  "lastModified": "2026-03-19T14:30:00Z",
+  "version": "1234567890",
+  "role": "owner"
+}

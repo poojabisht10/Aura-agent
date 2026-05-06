@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Aura Export</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 13px;
+      background: #1e1e1e;
+      color: #e0e0e0;
+      padding: 16px;
+      min-height: 100vh;
+    }
+    
+    .header {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+    
+    .header h1 {
+      font-size: 20px;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+    
+    .header p {
+      font-size: 12px;
+      color: #888;
+    }
+    
+    .form-group {
+      margin-bottom: 16px;
+    }
+    
+    label {
+      display: block;
+      font-size: 12px;
+      font-weight: 500;
+      color: #ccc;
+      margin-bottom: 6px;
+    }
+    
+    input[type="text"],
+    select {
+      width: 100%;
+      padding: 10px 12px;
+      background: #2d2d2d;
+      border: 1px solid #444;
+      border-radius: 6px;
+      color: #fff;
+      font-size: 13px;
+      transition: border-color 0.2s;
+    }
+    
+    input[type="text"]:focus,
+    select:focus {
+      outline: none;
+      border-color: #0d99ff;
+    }
+    
+    input[type="text"]::placeholder {
+      color: #666;
+    }
+    
+    input[type="radio"] {
+      cursor: pointer;
+      margin-right: 8px;
+    }
+    
+    select {
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23888' d='M6 8L2 4h8z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      padding-right: 32px;
+    }
+    
+    .btn {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    
+    .btn-primary {
+      background: #0d99ff;
+      color: #fff;
+    }
+    
+    .btn-primary:hover:not(:disabled) {
+      background: #0080e0;
+    }
+    
+    .btn-primary:disabled {
+      background: #444;
+      color: #666;
+      cursor: not-allowed;
+    }
+    
+    .btn-secondary {
+      background: #333;
+      color: #ccc;
+      margin-top: 8px;
+    }
+    
+    .btn-secondary:hover {
+      background: #444;
+    }
+    
+    .status {
+      margin-top: 16px;
+      padding: 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      display: none;
+    }
+    
+    .status.visible {
+      display: block;
+    }
+    
+    .status.info {
+      background: #1a3a5c;
+      border: 1px solid #0d99ff;
+      color: #7cc4ff;
+    }
+    
+    .status.success {
+      background: #1a3c1a;
+      border: 1px solid #4caf50;
+      color: #81c784;
+    }
+    
+    .status.error {
+      background: #3c1a1a;
+      border: 1px solid #f44336;
+      color: #ef9a9a;
+    }
+    
+    .spinner {
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      border: 2px solid #0d99ff;
+      border-top-color: transparent;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin-right: 8px;
+      vertical-align: middle;
+    }
+    
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    
+    .info-box {
+      background: #2a2a2a;
+      border-radius: 8px;
+      padding: 12px;
+      margin-bottom: 20px;
+    }
+    
+    .info-box h3 {
+      font-size: 12px;
+      font-weight: 600;
+      color: #0d99ff;
+      margin-bottom: 8px;
+    }
+    
+    .info-box ul {
+      list-style: none;
+      font-size: 11px;
+      color: #aaa;
+    }
+    
+    .info-box li {
+      padding: 4px 0;
+      padding-left: 16px;
+      position: relative;
+    }
+    
+    .info-box li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: #4caf50;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>🚀 Aura Export</h1>
+    <p>Export design to React components</p>
+  </div>
+  
+  <div class="info-box">
+    <h3>What will be exported:</h3>
+    <ul>
+      <li>All pages and frames</li>
+      <li>Complete node hierarchy</li>
+      <li>Colors, fonts, and styles</li>
+      <li>Images (as base64)</li>
+      <li>Layout information</li>
+    </ul>
+  </div>
+  
+  <form id="exportForm">
+    <div class="form-group">
+      <label for="backendUrl">Backend URL</label>
+      <input 
+        type="text" 
+        id="backendUrl" 
+        placeholder="http://localhost:8000"
+        value="http://localhost:8000"
+        required
+      >
+    </div>
+    
+    <div class="form-group">
+      <label for="projectName">Project Name</label>
+      <input 
+        type="text" 
+        id="projectName" 
+        placeholder="my-react-app"
+        required
+      >
+    </div>
+    
+    <div class="form-group">
+      <label for="uiLibrary">UI Library</label>
+      <select id="uiLibrary">
+        <option value="tailwind" selected>Tailwind CSS</option>
+        <option value="mui">Material UI</option>
+        <option value="chakra">Chakra UI</option>
+        <option value="css-modules">CSS Modules</option>
+      </select>
+    </div>
+    
+    <div class="form-group">
+      <label>Project Mode</label>
+      <div style="display: flex; flex-direction: column; gap: 8px;">
+        <label style="display: flex; align-items: center; cursor: pointer;">
+          <input type="radio" name="projectMode" value="new" checked style="margin-right: 8px;">
+          <span>New Project</span>
+        </label>
+        <label style="display: flex; align-items: center; cursor: pointer;">
+          <input type="radio" name="projectMode" value="existing" style="margin-right: 8px;">
+          <span>Add to Existing Project</span>
+        </label>
+      </div>
+    </div>
+    
+    <div class="form-group" id="existingProjectGroup" style="display: none;">
+      <label for="existingProject">Existing Project</label>
+      <select id="existingProject">
+        <option value="">Loading projects...</option>
+      </select>
+    </div>
+    
+    <div class="form-group" id="addAsGroup" style="display: none;">
+      <div style="padding: 10px 12px; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 6px; font-size: 12px; color: #a3e635;">
+        ✓ Will add as a new page route to the selected project. Existing components (Header, Footer, etc.) will be reused automatically.
+      </div>
+    </div>
+    
+    <button type="submit" class="btn btn-primary" id="exportBtn">
+      Export to Aura
+    </button>
+    <button type="button" class="btn btn-secondary" id="cancelBtn">
+      Cancel
+    </button>
+  </form>
+  
+  <div class="status" id="status"></div>
+  
+  <script>
+    const form = document.getElementById('exportForm');
+    const exportBtn = document.getElementById('exportBtn');
+    const cancelBtn = document.getElementById('cancelBtn');
+    const status = document.getElementById('status');
+    const projectNameInput = document.getElementById('projectName');
+    const backendUrlInput = document.getElementById('backendUrl');
+    const projectModeRadios = document.querySelectorAll('input[name="projectMode"]');
+    const existingProjectGroup = document.getElementById('existingProjectGroup');
+    const existingProjectSelect = document.getElementById('existingProject');
+    const addAsGroup = document.getElementById('addAsGroup');
+    
+    // Handle backend URL change - fetch projects if in existing mode
+    backendUrlInput.addEventListener('blur', function() {
+      const selectedMode = document.querySelector('input[name="projectMode"]:checked');
+      if (selectedMode && selectedMode.value === 'existing') {
+        fetchProjects();
+      }
+    });
+    
+    // Handle project mode change
+    projectModeRadios.forEach(radio => {
+      radio.addEventListener('change', function() {
+        if (this.value === 'existing') {
+          existingProjectGroup.style.display = 'block';
+          addAsGroup.style.display = 'block';
+          fetchProjects();
+        } else {
+          existingProjectGroup.style.display = 'none';
+          addAsGroup.style.display = 'none';
+        }
+      });
+    });
+    
+    // Fetch projects from backend
+    function fetchProjects() {
+      const backendUrl = backendUrlInput.value.trim();
+      if (!backendUrl) {
+        existingProjectSelect.innerHTML = '<option value="">Enter backend URL first</option>';
+        return;
+      }
+      
+      existingProjectSelect.innerHTML = '<option value="">Loading...</option>';
+      existingProjectSelect.disabled = true;
+      
+      parent.postMessage({
+        pluginMessage: {
+          type: 'fetch-projects',
+          backendUrl: backendUrl
+        }
+      }, '*');
+    }
+    
+    // Generate default project name from file name
+    window.onmessage = (event) => {
+      const msg = event.data.pluginMessage;
+      
+      if (msg.type === 'progress') {
+        showStatus('info', `<span class="spinner"></span>${msg.message}`, true);
+      } else if (msg.type === 'success') {
+        showStatus('success', `Export successful! Project ID: ${msg.result?.project_id || 'N/A'}`);
+        exportBtn.disabled = false;
+        exportBtn.textContent = 'Export to Aura';
+      } else if (msg.type === 'error') {
+        showStatus('error', `Error: ${msg.message}`);
+        exportBtn.disabled = false;
+        exportBtn.textContent = 'Export to Aura';
+      } else if (msg.type === 'projects-list') {
+        // Populate projects dropdown
+        existingProjectSelect.innerHTML = '';
+        if (msg.projects && msg.projects.length > 0) {
+          existingProjectSelect.innerHTML = '<option value="">Select a project...</option>';
+          msg.projects.forEach(project => {
+            const option = document.createElement('option');
+            option.value = project.id;
+            option.textContent = project.name + ' (ID: ' + project.id + ')';
+            existingProjectSelect.appendChild(option);
+          });
+        } else {
+          existingProjectSelect.innerHTML = '<option value="">No available projects found</option>';
+        }
+        existingProjectSelect.disabled = false;
+      }
+    };
+    
+    function showStatus(type, message, useHtml = false) {
+      status.className = `status visible ${type}`;
+      if (useHtml) {
+        status.innerHTML = message;
+      } else {
+        status.textContent = message;
+      }
+    }
+    
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      console.log('[Aura UI] Form submitted');
+      
+      const backendUrl = backendUrlInput.value.trim();
+      const projectName = projectNameInput.value.trim();
+      const uiLibrary = document.getElementById('uiLibrary').value;
+      const projectMode = document.querySelector('input[name="projectMode"]:checked').value;
+      
+      console.log('[Aura UI] Values:', { backendUrl, projectName, uiLibrary, projectMode });
+      
+      if (!backendUrl || !projectName) {
+        showStatus('error', 'Please fill in all required fields');
+        return;
+      }
+      
+      // Validate existing project selection if mode is "existing"
+      let addAs = 'new_project';
+      let parentProjectId = null;
+      
+      if (projectMode === 'existing') {
+        const selectedProjectId = existingProjectSelect.value;
+        if (!selectedProjectId) {
+          showStatus('error', 'Please select an existing project');
+          return;
+        }
+        parentProjectId = parseInt(selectedProjectId, 10);
+        addAs = 'new_page';
+      }
+      
+      // Disable button and show loading
+      exportBtn.disabled = true;
+      exportBtn.textContent = 'Exporting...';
+      showStatus('info', '<span class="spinner"></span>Starting export...', true);
+      
+      console.log('[Aura UI] Sending message to plugin...', { addAs, parentProjectId });
+      
+      // Send message to plugin code
+      parent.postMessage({
+        pluginMessage: {
+          type: 'export',
+          backendUrl: backendUrl,
+          projectName: projectName,
+          uiLibrary: uiLibrary,
+          addAs: addAs,
+          parentProjectId: parentProjectId,
+        }
+      }, '*');
+      
+      console.log('[Aura UI] Message sent');
+    });
+    
+    cancelBtn.addEventListener('click', () => {
+      parent.postMessage({
+        pluginMessage: { type: 'cancel' }
+      }, '*');
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+{
+  "page1": {
+    "page_name": "Homepage",
+    "reused": 0,
+    "adapted": 0,
+    "created_new": 3,
+    "components_created": ["Header", "Footer", "Button"],
+    "library_size_after": 3
+  },
+  "page2": {
+    "page_name": "Contact Page",
+    "reused": 2,
+    "adapted": 0,
+    "created_new": 1,
+    "components_reused": [
+      { "name": "Header", "similarity": 0.92, "source": "page1" },
+      { "name": "Footer", "similarity": 0.88, "source": "page1" }
+    ],
+    "components_created": ["ContactForm"],
+    "library_size_after": 4
+  },
+  "total": {
+    "reused": 2,
+    "adapted": 0,
+    "created_new": 4,
+    "library_size": 4,
+    "reuse_rate": "33.3%"
+  }
+}

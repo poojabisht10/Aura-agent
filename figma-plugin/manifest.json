@@ -1,0 +1,14 @@
+{
+  "name": "Aura Export",
+  "id": "aura-figma-export-plugin",
+  "api": "1.0.0",
+  "main": "dist/code.js",
+  "ui": "dist/ui.html",
+  "networkAccess": {
+    "allowedDomains": ["*"],
+    "reasoning": "Required to send design data to user's backend server"
+  },
+  "editorType": ["figma"],
+  "documentAccess": "dynamic-page",
+  "permissions": ["currentuser"]
+}
